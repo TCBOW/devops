@@ -1,0 +1,7 @@
+version: "3"
+services:
+  kroki-server:
+    image: yuzutech/kroki 
+    restart: always
+    ports:
+      - "8090:8000"

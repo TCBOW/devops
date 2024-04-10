@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    restart: always
+    hostname: 'craftnet.local'
+    environment:  
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://craftnet.local'
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - /home/tochibow9/Docker/gitlab/config:/etc/gitlab
+      - /home/tochibow9/Docker/gitlab/logs:/var/log/gitlab
+      - /home/tochibow9/Docker/gitlab/data:/var/opt/gitlab
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    restart: always
+    volumes:
+      - /home/tochibow9/Docker/gitlab-runner/config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
